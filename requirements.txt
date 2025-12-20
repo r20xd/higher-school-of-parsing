@@ -1,10 +1,26 @@
-# Core
-pydantic-settings>=2.0.0
+# основное
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.2
+pydantic-settings==2.1.0
+dependency-injector>=4.41.0
 
-# HTTP parsing
-requests>=2.31.0
-beautifulsoup4>=4.12.0
-tenacity>=8.2.0
+# db и драйвер
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
 
-# Browser parsing
-selenium>=4.15.0
+celery==5.3.6
+redis==5.0.1
+
+# парсинг
+requests==2.31.0
+beautifulsoup4==4.12.2
+tenacity==8.2.3
+selenium==4.15.2
+
+# тесты
+pytest==7.4.3
+pytest-mock==3.12.0
+freezegun==1.2.2
+mypy==1.7.1
+httpx==0.25.2
