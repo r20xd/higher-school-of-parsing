@@ -2,6 +2,8 @@ import logging
 import sys
 from fastapi import FastAPI
 from src.core.container import Container
+from src.api.routes import router as parser_router
+from src.db.models import Base
 
 # логирование
 logging.basicConfig(
@@ -14,6 +16,9 @@ logger = logging.getLogger(__name__)
 def create_app() -> FastAPI:
     container = Container()
 
+    db_engine = container.db_engine()
+    Base.metadata.create_all(bind=db_engine)
+
     app = FastAPI(
         title="Higher School of Parsing",
         description="Система для сбора, хранения и визуализации данных с различных веб-ресурсов",
@@ -21,6 +26,8 @@ def create_app() -> FastAPI:
     )
 
     app.container = container
+    
+    app.include_router(parser_router, prefix="/api/v1", tags=["Scrapers"])
 
     @app.get("/")
     async def is_alive():
