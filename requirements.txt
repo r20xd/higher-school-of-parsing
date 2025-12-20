@@ -1,0 +1,10 @@
+# Core
+pydantic-settings>=2.0.0
+
+# HTTP parsing
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+tenacity>=8.2.0
+
+# Browser parsing
+selenium>=4.15.0
