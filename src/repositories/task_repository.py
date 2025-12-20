@@ -24,3 +24,7 @@ class TaskRepository:
                 if result:
                     task.result = result
                 session.commit()
+    
+    def get_by_id(self, task_id: str) -> ScrapingTask:
+        with self.session_factory() as session:
+            return session.query(ScrapingTask).filter(ScrapingTask.id == task_id).first()

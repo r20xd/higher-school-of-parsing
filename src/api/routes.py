@@ -4,6 +4,7 @@ from dependency_injector.wiring import inject, Provide
 from src.core.container import Container
 from src.api.schemas import ParsingRequest, ParsingResponse
 from src.repositories.task_repository import TaskRepository
+from uuid import UUID
 
 router = APIRouter()
 
@@ -31,3 +32,21 @@ def parse_url(
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Failed at step ???: {e}")
+
+@router.get("/tasks/{task_id}", response_model=dict)
+@inject
+def get_task_status(
+    task_id: UUID,
+    task_repository: TaskRepository = Depends(Provide[Container.task_repository]),
+):
+    task = task_repository.get_by_id(str(task_id))
+    
+    if not task:
+        raise HTTPException(status_code=404, detail="Задача не найдена")
+    
+    return {
+        "id": task.id,
+        "status": task.status,
+        "result": task.result,
+        "created_at": task.created_at
+    }
