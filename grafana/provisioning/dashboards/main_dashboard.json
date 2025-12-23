@@ -380,10 +380,10 @@
         "pieType": "pie",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "sum"
           ],
-          "fields": "",
-          "values": false
+          "fields": "/^count$/",
+          "values": true
         },
         "tooltip": {
           "mode": "single",

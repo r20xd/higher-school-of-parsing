@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.orm import Session
 from src.db.models import ScrapingTask
 
@@ -23,6 +24,8 @@ class TaskRepository:
                 task.status = status
                 if result:
                     task.result = result
+                if status in ("done", "error"):
+                    task.completed_at = datetime.utcnow()
                 session.commit()
     
     def get_by_id(self, task_id: str) -> ScrapingTask:

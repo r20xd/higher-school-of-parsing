@@ -209,10 +209,10 @@
         "pieType": "donut",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "sum"
           ],
-          "fields": "",
-          "values": false
+          "fields": "/^count$/",
+          "values": true
         },
         "tooltip": {
           "mode": "single",
@@ -321,7 +321,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT SUBSTRING(url FROM '^https?://([^/]+)') as domain, CAST(SUM(CASE WHEN status = 'error' THEN 1 ELSE 0 END) AS FLOAT) / NULLIF(COUNT(*), 0) as error_rate FROM scraping_tasks GROUP BY 1 HAVING COUNT(*) >= 3 ORDER BY 2 DESC LIMIT 10",
+          "rawSql": "SELECT SUBSTRING(url FROM '^https?://([^/]+)') as domain, CAST(SUM(CASE WHEN status = 'error' THEN 1 ELSE 0 END) AS FLOAT) / NULLIF(COUNT(*), 0) as error_rate FROM scraping_tasks GROUP BY 1 HAVING SUM(CASE WHEN status = 'error' THEN 1 ELSE 0 END) > 0 ORDER BY 2 DESC LIMIT 10",
           "refId": "A"
         }
       ],
