@@ -1,6 +1,11 @@
 .env
 .env.example
 venv
-src/__pycache__/
-src/parsers/__pycache__/
-tests/__pycache__/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store

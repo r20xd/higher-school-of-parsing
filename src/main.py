@@ -1,11 +1,12 @@
 import logging
 import sys
+
 from fastapi import FastAPI
-from src.core.container import Container
+
 from src.api.routes import router as parser_router
+from src.core.container import Container
 from src.db.models import Base
 
-# логирование
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
