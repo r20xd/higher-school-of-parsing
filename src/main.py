@@ -17,7 +17,10 @@ def create_app() -> FastAPI:
     container = Container()
 
     db_engine = container.db_engine()
-    Base.metadata.create_all(bind=db_engine)
+    try:
+        Base.metadata.create_all(bind=db_engine)
+    except Exception as e:
+        print(f"Предупреждение: подключение к ДБ не случилось при запуске. При тестах это норм. Ошибка: {e}")
 
     app = FastAPI(
         title="Higher School of Parsing",
@@ -27,7 +30,7 @@ def create_app() -> FastAPI:
 
     app.container = container
     
-    app.include_router(parser_router, prefix="/api/v1", tags=["Scrapers"])
+    app.include_router(parser_router, tags=["Scrapers"])
 
     @app.get("/")
     async def is_alive():
