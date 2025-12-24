@@ -6,9 +6,8 @@ def test_create_parse_task(client):
         "method": "http"
     }
 
-    # MOCK: Подменяем вызов Celery, чтобы не нужен был Redis
     with patch("src.worker.tasks.parse_url_task.apply_async") as mock_celery:
-        mock_celery.return_value = None  # Celery ничего не возвращает в синхронном режиме
+        mock_celery.return_value = None
 
         response = client.post("/parse", json=payload)
 

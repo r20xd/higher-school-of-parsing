@@ -4,8 +4,7 @@ from src.worker.tasks import parse_url_task
 
 def test_celery_task_success():
     """
-    Проверяем успешный сценарий:
-    pending -> processing -> (парсинг) -> done
+    Проверка успеха pending -> processing -> (парсинг) -> done
     """
     url = "http://test-celery.com"
     method = "http"
@@ -28,7 +27,7 @@ def test_celery_task_success():
 
 def test_celery_task_failure():
     """
-    Проверяем сценарий ошибки
+    Проверка ошибки
     """
     task_id = "fail-id"
 
